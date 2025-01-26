@@ -13,7 +13,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import CircularProgress from '@mui/material/CircularProgress';
-import Slider from '@mui/material/Slider';
+//import Slider from '@mui/material/Slider';
 import styles from './dashboard.module.css'
 import Accordion from '@mui/material/Accordion';
 import AccordionActions from '@mui/material/AccordionActions';
@@ -24,6 +24,8 @@ import { Sort } from '@mui/icons-material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import Slider from 'react-slider';
+import Myslider from './myslider';
 
 export default function Dashboard({
     data,
@@ -65,7 +67,7 @@ export default function Dashboard({
     const [selectedLabels, setSelectedLabels] = React.useState<string[]>([]);
     const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>, labels: string[]) => {
         setSelectedLabels((prev) =>
-            event.target.checked 
+            event.target.checked
                 ? [...new Set([...prev, ...labels])] // Add multiple labels, ensuring uniqueness
                 : prev.filter((item) => !labels.includes(item)) // Remove only the unchecked labels
         );
@@ -82,11 +84,16 @@ export default function Dashboard({
             ? [...morefilteredData].sort((a, b) => b.progress - a.progress) // Highest progress first
             : filteredData;
     const displayedData = sortedData.slice(0, Number(results));
+    const MIN = 0;
+    const MAX = 600;
+    const [values, setValues] = React.useState([MIN, MAX]);
 
 
 
     return (
         <div className={styles["entire-page"]}>
+            <Myslider/>
+            
             <div>
                 <TextField
                     id="searchbar"
@@ -155,11 +162,17 @@ export default function Dashboard({
                                     <p>{item.date}</p>
                                 </div>
                                 <Slider
-                                    aria-label="Progress"
-                                    defaultValue={30}
-                                    disabled
-                                    color="secondary"
+                                    className={styles["slider"]}
+                                    value={values}
+                                    min={200}
+                                    max={300}
+                                    onChange={setValues}
+                                    thumbClassName={styles.thumb}  // Apply the thumb class
+                                    trackClassName={`${styles.track}`} 
+
                                 />
+                                <h1>Custom CSS range slider</h1>
+
                                 <p>View More</p>
                             </Card>
                         </div>
@@ -169,7 +182,7 @@ export default function Dashboard({
                 )}
             </div>
 
-            {/* Filters & Accordion Section */}
+
             <div className={styles["filter"]}>
                 <p>All Categories</p>
                 <p>Clear filters</p>
@@ -190,10 +203,10 @@ export default function Dashboard({
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                         <Typography component="span">
-                        <FormControlLabel control={<Checkbox
-                            defaultChecked={false}
-                            onChange={(e) => handleLabelChange(e, ["Sit to Stand"])}
-                        />} label="Basic ADL (17)" />
+                            <FormControlLabel control={<Checkbox
+                                defaultChecked={false}
+                                onChange={(e) => handleLabelChange(e, ["Sit to Stand"])}
+                            />} label="Basic ADL (17)" />
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -204,11 +217,11 @@ export default function Dashboard({
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                         <Typography component="span">
-                        <FormControlLabel control={<Checkbox
-                            defaultChecked={false}
-                            onChange={(e) => handleLabelChange(e, ["Dynamic stance, upper extremify", "Static Standing"])}
-                        />} label="Instrumental ADL (5)" />
-                            
+                            <FormControlLabel control={<Checkbox
+                                defaultChecked={false}
+                                onChange={(e) => handleLabelChange(e, ["Dynamic stance, upper extremify", "Static Standing"])}
+                            />} label="Instrumental ADL (5)" />
+
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
