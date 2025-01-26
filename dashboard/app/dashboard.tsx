@@ -63,9 +63,11 @@ export default function Dashboard({
 
 
     const [selectedLabels, setSelectedLabels] = React.useState<string[]>([]);
-    const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>, label: string) => {
+    const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>, labels: string[]) => {
         setSelectedLabels((prev) =>
-            event.target.checked ? [...prev, label] : prev.filter((item) => item !== label)
+            event.target.checked 
+                ? [...new Set([...prev, ...labels])] // Add multiple labels, ensuring uniqueness
+                : prev.filter((item) => !labels.includes(item)) // Remove only the unchecked labels
         );
     };
 
@@ -173,10 +175,10 @@ export default function Dashboard({
                 <p>Clear filters</p>
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
-                        <FormControlLabel control={<Checkbox 
-            defaultChecked={false} 
-            onChange={(e) => handleLabelChange(e, "ADV Static Standing")} 
-        />} label="Workout (23)" />
+                        <FormControlLabel control={<Checkbox
+                            defaultChecked={false}
+                            onChange={(e) => handleLabelChange(e, ["ADV Static Standing", "ADV Dynamic stance, upper extremity"])}
+                        />} label="Workout (23)" />
                     </AccordionSummary>
                     <AccordionDetails>
                         ADV Static Standing
@@ -188,7 +190,10 @@ export default function Dashboard({
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                         <Typography component="span">
-                            <FormControlLabel control={<Checkbox defaultChecked={false} />} label="Basic ADL (17)" />
+                        <FormControlLabel control={<Checkbox
+                            defaultChecked={false}
+                            onChange={(e) => handleLabelChange(e, ["Sit to Stand"])}
+                        />} label="Basic ADL (17)" />
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
@@ -199,7 +204,11 @@ export default function Dashboard({
                 <Accordion>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                         <Typography component="span">
-                            <FormControlLabel control={<Checkbox defaultChecked={false} />} label="Instrumental ADL (5)" />
+                        <FormControlLabel control={<Checkbox
+                            defaultChecked={false}
+                            onChange={(e) => handleLabelChange(e, ["Dynamic stance, upper extremify", "Static Standing"])}
+                        />} label="Instrumental ADL (5)" />
+                            
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
