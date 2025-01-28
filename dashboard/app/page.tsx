@@ -13,6 +13,8 @@ const data = [
     Frequency: "3 Times/ Week",
     lastAttempt: 2,
     date: "10/26/2024",
+    minRange:  40,
+    maxRange: 60,
     avgTime: 49
   },
   {
@@ -24,6 +26,8 @@ const data = [
     Frequency: "3 Times/ Week",
     lastAttempt: 5,
     date: "10/20/2024",
+    minRange:  36,
+    maxRange: 55,
     avgTime: 40
   },
   {
@@ -35,6 +39,8 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 8,
     date: "10/20/2024",
+    minRange:  42,
+    maxRange: 52,
     avgTime: 49
   },
   {
@@ -46,7 +52,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 12,
     date: "10/20/2024",
-    avgTime: 27
+    avgTime: 27,
+    minRange: 14,
+    maxRange: 32,
   },
   {
     key: 4,
@@ -57,7 +65,9 @@ const data = [
     Frequency: "10 Times/ Week",
     lastAttempt: 25,
     date: "10/20/2024",
-    avgTime: 43
+    avgTime: 43,
+    minRange:  40,
+    maxRange: 56,
   },
   {
     key: 5,
@@ -68,7 +78,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 34,
     date: "10/20/2024",
-    avgTime: 15
+    avgTime: 15,
+    minRange: 10,
+    maxRange: 40,
   },
   {
     key: 6,
@@ -79,7 +91,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 58,
     date: "10/20/2024",
-    avgTime: 35
+    avgTime: 35,
+    minRange: 20,
+    maxRange: 55,
   },
   {
     key: 7,
@@ -90,7 +104,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 60,
     date: "10/20/2024",
-    avgTime: 25
+    avgTime: 25,
+    minRange: 20,
+    maxRange: 40,
   },
   {
     key: 8,
@@ -101,7 +117,9 @@ const data = [
     Frequency: "3 Times/ Week",
     lastAttempt: 65,
     date: "10/26/2024",
-    avgTime: 49
+    avgTime: 49,
+    minRange:  40,
+    maxRange: 50,
   },
   {
     key: 9,
@@ -112,7 +130,9 @@ const data = [
     Frequency: "3 Times/ Week",
     lastAttempt: 70,
     date: "10/20/2024",
-    avgTime: 40
+    avgTime: 40,
+    minRange:  30,
+    maxRange: 60,
   },
   {
     key: 10,
@@ -123,7 +143,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 72,
     date: "10/20/2024",
-    avgTime: 49
+    avgTime: 49,
+    minRange:  24,
+    maxRange: 54,
   },
   {
     key: 11,
@@ -134,7 +156,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 73,
     date: "10/20/2024",
-    avgTime: 27
+    avgTime: 27,
+    minRange: 20,
+    maxRange: 30,
   },
   {
     key: 12,
@@ -145,7 +169,9 @@ const data = [
     Frequency: "10 Times/ Week",
     lastAttempt: 80,
     date: "10/20/2024",
-    avgTime: 43
+    avgTime: 43,
+    minRange: 40,
+    maxRange: 50,
   },
   {
     key: 13,
@@ -156,7 +182,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 82,
     date: "10/20/2024",
-    avgTime: 15
+    avgTime: 15,
+    minRange: 5,
+    maxRange: 19,
   },
   {
     key: 14,
@@ -167,7 +195,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 84,
     date: "10/20/2024",
-    avgTime: 35
+    avgTime: 35,
+    minRange: 20,
+    maxRange: 40,
   },
   {
     key: 15,
@@ -178,7 +208,9 @@ const data = [
     Frequency: "5 Times/ Week",
     lastAttempt: 90,
     date: "10/20/2024",
-    avgTime: 25
+    avgTime: 25,
+    minRange: 20,
+    maxRange: 30,
   },
 
 ];

@@ -5,68 +5,94 @@ import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 
 const Separator = styled('div')(
-  ({ theme }) => `
+    ({ theme }) => `
   height: ${theme.spacing(3)};
 `,
 );
 
-const marks = [
-  {
-    value: 0,
-    label: '0°C',
-  },
-  {
-    value: 20,
-    label: '20°C',
-  },
-  {
-    value: 37,
-    label: '37°C',
-  },
-  {
-    value: 100,
-    label: '100°C',
-  },
-];
+
 
 function valuetext(value: number) {
-  return `${value}°C`;
+    return `${value}°C`;
 }
 
-export default function TrackFalseSlider() {
-    
-  return (
-    <Box sx={{ width: 250 }}>
-    
-      <Separator />
-      <Typography id="track-false-range-slider" gutterBottom>
-        Removed track range slider
-      </Typography>
-      <Slider
-  
-        aria-labelledby="track-false-range-slider"
-        getAriaValueText={valuetext}
-        defaultValue={[20, 37, 50]}
-        marks={marks}
-        sx={{
-            // Styling the track
-            '& .MuiSlider-track': {
-              background: 'linear-gradient(to right, #ff5733 10%, #ffbd69 90%)',
-              height: '6px', // Track height
-              borderRadius: '3px', // Track rounded corners
-            },
-            // Styling the thumb (both min and max)
-            '& .MuiSlider-thumb': {
-              backgroundColor: 'transparent', // Make both thumbs transparent
-              width: 20, // Thumb width
-              height: 20, // Thumb height
-              borderRadius: '50%', // Thumb shape
-              boxShadow: 'none', // Remove shadow (optional)
-              border: '2px solid #ff5733', // Optional: add border to highlight thumbs (change color as needed)
-            }
-            
-          }}
-      />
-    </Box>
-  );
+interface TrackFalseSliderProps {
+    value1: number;
+    value2: number;
+    value3: number;
+}
+
+
+export default function Myslider({ value1, value2, value3 }: TrackFalseSliderProps) {
+    const values = [value1, value2, value3];
+    const marks = [
+        {
+            value: 0,
+            label: '0',
+        },
+        {
+            value: value2,
+            label: `${value2} sec`,
+        },
+
+        {
+            value: 60,
+            label: '60',
+        },
+    ];
+
+    return (
+        <Box sx={{ width: 250 }}>
+            <Slider
+                aria-labelledby="track-false-range-slider"
+                getAriaValueText={valuetext}
+                defaultValue={values}
+                marks={marks}
+                min={0}
+                max={60}
+                valueLabelDisplay="auto"
+                slotProps={{
+                    thumb: ({ value }) => ({
+                        sx: {
+                            backgroundColor: 'transparent',  // Make thumb invisible
+                            height: 0,
+                            width: 0,
+                            border: 'none',
+                            boxShadow: 'none',
+                            visibility: 'hidden',  // Keep thumb hidden
+                        },
+                    }),
+                }}
+                sx={{
+                    // Styling the track to have the gradient from green to red
+                    '& .MuiSlider-track': {
+                        background: 'linear-gradient(to right, #4caf50 10%, #f44336 100%)', // Green to Red gradient
+                        height: '6px',
+                        borderRadius: '3px',
+                    },
+                    // Styling the rail (background behind the track) to be white
+                    '& .MuiSlider-rail': {
+                        backgroundColor: 'white',  // White background for the rail
+                        height: '6px',
+                        borderRadius: '3px',
+
+                    },
+                    '& .MuiSlider-active': {
+                        color: "black"
+                    },
+                    // Optional: Adding a vertical line at the 50 mark
+                    position: 'relative',
+                    '&::after': {
+                        content: '""',
+                        position: 'absolute',
+                        top: '0',
+                        bottom: '0',
+                        left: `calc(${(value2 / 60) * 100}% - 1px)`,  // Adjust vertical line based on value2
+                        width: "2px",
+                        backgroundColor: '#333',  // Vertical line color
+                    },
+                }}
+            />
+        </Box>
+    );
 }

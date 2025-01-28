@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Image from "next/image";
 import TextField from '@mui/material/TextField';
+import { InputAdornment } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -26,6 +27,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Slider from 'react-slider';
 import Myslider from './myslider';
+import SearchIcon from '@mui/icons-material/Search';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import FormHelperText from '@mui/material/FormHelperText';
+import { SxProps } from '@mui/material/styles';
+
+
+
 
 export default function Dashboard({
     data,
@@ -39,12 +47,37 @@ export default function Dashboard({
         Frequency: string;
         lastAttempt: number;
         date: string;
+        minRange: number;
+        maxRange: number;
         avgTime: number;
     }>;
 }>) {
+    const selectFieldStyles = {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: "30px",
+        marginBottom: "5%",
+        marginLeft: 0,
+        ".MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+        },
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+        },
+        "& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline": {
+            borderColor: "transparent",
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": {
+            border: "none !important",
+        },
+        backgroundColor: 'white',
+        '& .MuiOutlinedInput-root': {
+            backgroundColor: 'white',
+        }
+    };
+
     const [sort, setSort] = React.useState("Recently Updated");
     const [results, setResults] = React.useState("10");
-
     //search functionality
     const [searchinput, setSearchinput] = React.useState("");
     const [submittedQuery, setSubmittedQuery] = React.useState("");
@@ -88,98 +121,105 @@ export default function Dashboard({
     const MAX = 600;
     const [values, setValues] = React.useState([MIN, MAX]);
 
-
-
     return (
         <div className={styles["entire-page"]}>
-            <Myslider/>
-            
             <div>
-                <TextField
-                    id="searchbar"
-                    label="Search Exercise"
-                    variant="outlined"
-                    onChange={(e) => setSearchinput(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    value={searchinput}
-                />
+                <form noValidate autoComplete="off">
+                    <FormControl sx={{ width: '25ch' }} className={styles.searchbar}>
+                        <OutlinedInput placeholder="Search Exercise"
+                            startAdornment={
+                                <InputAdornment position="start">
+                                    <SearchIcon />
+                                </InputAdornment>
+                            }
+                            sx={{
+                                '& .MuiOutlinedInput-notchedOutline': {
+                                    borderRadius: '30px',
+                                },
+                                '& .MuiOutlinedInput-input': {
+                                    paddingTop: '8px',
+                                    paddingBottom: '8px',
+                                },
+                            }}
+                        />
 
-                <p>Sorted by</p>
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-select-small-label">Sort</InputLabel>
-                    <Select
-                        labelId="demo-select-small-label"
-                        id="demo-select-small"
-                        value={sort}
-                        label="Sort"
-                        onChange={handleChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value="Recently Updated">Recently Updated</MenuItem>
-                        <MenuItem value="Progress">Progress</MenuItem>
-                    </Select>
-                </FormControl>
+                    </FormControl>
+                </form>
+                <div className={styles.sorting}>
+                    <p className={styles.sortby}>Sorted by</p>
 
-                <p>View Results</p>
-                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                    <InputLabel id="demo-select-small-label">Results</InputLabel>
-                    <Select
-                        labelId="demo-select-small-label"
-                        id="demo-select-small"
-                        value={results}
-                        label="Results"
-                        onChange={handleResultsChange}
-                    >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value="5">5</MenuItem>
-                        <MenuItem value="10">10</MenuItem>
-                        <MenuItem value="15">15</MenuItem>
-                    </Select>
-                </FormControl>
+                    <FormControl sx={{ m: 1, minWidth: 180, display: 'flex', alignItems: 'center' }} size="small">
+                        <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={sort}
+                            onChange={handleChange}
+                            sx={selectFieldStyles}
 
+                        >
+                            <MenuItem className={styles.dropdown} value="Recently Updated">Recently Updated</MenuItem>
+                            <MenuItem value="Progress">Progress</MenuItem>
+                        </Select>
+                    </FormControl>
 
-                {displayedData.length > 0 ? (
-                    displayedData.map((item) => (
-                        <div key={item.key}>
-                            <Card className={styles["my-card"]}>
-                                <CardContent>
-                                    <CircularProgress variant="determinate" value={item.progress} />
-                                </CardContent>
-                                <div>
-                                    <Button>{item.taskCategory}</Button>
-                                    <p>{item.task}</p>
-                                </div>
-                                <div>
-                                    <Button>{item.active}</Button>
-                                    <p>{item.Frequency}</p>
-                                </div>
-                                <div>
-                                    <Button>{item.lastAttempt} days ago</Button>
-                                    <p>{item.date}</p>
-                                </div>
-                                <Slider
-                                    className={styles["slider"]}
-                                    value={values}
-                                    min={200}
-                                    max={300}
-                                    onChange={setValues}
-                                    thumbClassName={styles.thumb}  // Apply the thumb class
-                                    trackClassName={`${styles.track}`} 
+                    <p className={styles.viewresults}>View Results</p>
+                    <FormControl sx={{ minWidth: 120, display: 'flex', alignItems: 'center' }} size="small">
+                        <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={results}
+                            onChange={handleResultsChange}
+                            sx={selectFieldStyles}
+                        >
+                            <MenuItem value="5">5</MenuItem>
+                            <MenuItem value="10">10</MenuItem>
+                            <MenuItem value="15">15</MenuItem>
+                        </Select>
+                    </FormControl>
+                </div>
 
-                                />
-                                <h1>Custom CSS range slider</h1>
+                <div>
+                    {displayedData.length > 0 ? (
+                        displayedData.map((item) => (
 
-                                <p>View More</p>
-                            </Card>
-                        </div>
-                    ))
-                ) : (
-                    <p>No matching tasks found.</p>
-                )}
+                            <div key={item.key}>
+                                <Card className={styles["my-card"]}>
+                                    <CardContent>
+                                        <CircularProgress
+                                            variant="determinate"
+                                            value={item.progress}
+                                            sx={{
+                                                color: 'red', // Color for the filled part
+                                            
+                                                "& .MuiCircularProgress-circle": {
+                                                    stroke: "pink", // Color for the unfilled (track) part
+                                                    opacity: 0.3, // Optional: Adjust opacity to differentiate the track from progress
+                                                }
+                                            }}
+                                        />
+
+                                    </CardContent>
+                                    <div>
+                                        <Button>{item.taskCategory}</Button>
+                                        <p>{item.task}</p>
+                                    </div>
+                                    <div>
+                                        <Button>{item.active}</Button>
+                                        <p>{item.Frequency}</p>
+                                    </div>
+                                    <div>
+                                        <Button>{item.lastAttempt} days ago</Button>
+                                        <p>{item.date}</p>
+                                    </div>
+                                    <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
+                                    <p>View More</p>
+                                </Card>
+                            </div>
+                        ))
+                    ) : (
+                        <p>No matching tasks found.</p>
+                    )}
+                </div>
             </div>
 
 
@@ -230,7 +270,6 @@ export default function Dashboard({
                     <AccordionDetails>
                         Static Standing
                     </AccordionDetails>
-
                 </Accordion>
             </div>
         </div>
