@@ -189,27 +189,27 @@ export default function Dashboard({
                                             variant="determinate"
                                             value={item.progress}
                                             sx={{
-                                                color: 'red', // Color for the filled part
+                                                color: 'red', 
                                             
                                                 "& .MuiCircularProgress-circle": {
-                                                    stroke: "pink", // Color for the unfilled (track) part
-                                                    opacity: 0.3, // Optional: Adjust opacity to differentiate the track from progress
+                                                    stroke: "pink", 
+                                                    opacity: 0.3, 
                                                 }
                                             }}
                                         />
 
                                     </CardContent>
-                                    <div>
-                                        <Button>{item.taskCategory}</Button>
-                                        <p>{item.task}</p>
+                                    <div className={styles["first-item"]}>
+                                        <p className={styles.category}>{item.taskCategory}</p>
+                                        <p className={styles.smalllabel}>{item.task}</p>
                                     </div>
-                                    <div>
-                                        <Button>{item.active}</Button>
-                                        <p>{item.Frequency}</p>
+                                    <div className={styles["first-item"]}>
+                                        <p className={styles.active}>{item.active}</p>
+                                        <p className={styles.smalllabel}>{item.Frequency}</p>
                                     </div>
-                                    <div>
-                                        <Button>{item.lastAttempt} days ago</Button>
-                                        <p>{item.date}</p>
+                                    <div className={styles["first-item"]}>
+                                        <p className={styles.daysago}>{item.lastAttempt} days ago</p>
+                                        <p className={styles.smalllabel}>{item.date}</p>
                                     </div>
                                     <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
                                     <p>View More</p>

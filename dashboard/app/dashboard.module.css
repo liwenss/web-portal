@@ -56,3 +56,39 @@
    margin-left: 4%;
    white-space: nowrap;
 }
+
+.smalllabel {
+    font-size: 80%;
+}
+
+.category {
+    background-color: white;
+    padding: 2%;
+    text-align: center;
+    width: 100px;
+    border-radius: 30px;
+    max-height:34px;
+}
+
+.active {
+    background-color: white;
+    padding: 2%;
+    text-align: center;
+    width: 80px;
+    border-radius: 30px;
+    max-height:34px;
+}
+
+.daysago {
+    background-color: white;
+    padding: 2%;
+    text-align: center;
+    width: 80px;
+    border-radius: 30px;
+    max-height:34px;
+    
+}
+
+.first-item {
+    width: 200px;
+}
