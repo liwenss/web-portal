@@ -78,6 +78,7 @@ export default function Dashboard({
 
     const [sort, setSort] = React.useState("Recently Updated");
     const [results, setResults] = React.useState("10");
+
     //search functionality
     const [searchinput, setSearchinput] = React.useState("");
     const [submittedQuery, setSubmittedQuery] = React.useState("");
@@ -101,20 +102,18 @@ export default function Dashboard({
     const handleLabelChange = (event: React.ChangeEvent<HTMLInputElement>, labels: string[]) => {
         setSelectedLabels((prev) =>
             event.target.checked
-                ? [...new Set([...prev, ...labels])] // Add multiple labels, ensuring uniqueness
-                : prev.filter((item) => !labels.includes(item)) // Remove only the unchecked labels
+                ? [...new Set([...prev, ...labels])]
+                : prev.filter((item) => !labels.includes(item))
         );
     };
 
     const morefilteredData = filteredData.filter((item) =>
         selectedLabels.length === 0 || selectedLabels.includes(item.task)
-
-
     );
     const sortedData = (sort === "Recently Updated")
-        ? [...morefilteredData].sort((a, b) => a.lastAttempt - b.lastAttempt) // Sort by lastAttempt (ascending)
+        ? [...morefilteredData].sort((a, b) => a.lastAttempt - b.lastAttempt)
         : (sort === "Progress")
-            ? [...morefilteredData].sort((a, b) => b.progress - a.progress) // Highest progress first
+            ? [...morefilteredData].sort((a, b) => b.progress - a.progress)
             : filteredData;
     const displayedData = sortedData.slice(0, Number(results));
     const MIN = 0;
@@ -173,54 +172,67 @@ export default function Dashboard({
                         >
                             <MenuItem value="5">5</MenuItem>
                             <MenuItem value="10">10</MenuItem>
-                            <MenuItem value="15">15</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
 
                 <div>
                     {displayedData.length > 0 ? (
-                        displayedData.map((item) => (
+                        displayedData.map((item) => {
+                            const categoryColor = item.taskCategory === "Balance" ? "#20B2AA"
+                                : item.taskCategory === "Combo" ? "purple" //purple
+                                : item.taskCategory === "Upper Ex"? "orange" : "red"; //organge, red
+                            const activewords = item.active === "Active" ? "purple" : "grey"; //purple, grey
+                            const activebackground = item.active === "Active" ? "white" : "#D3D3D3"; //white, grey
+                            const lastColor = item.active === "Inactive" ? "grey"
+                            : item.lastAttempt <= 10 ? "green"
+                            : item.lastAttempt >10 && item.lastAttempt<= 20 ? "orange" : "red";
+                            const lastBackground = item.active === "Inactive" ? "#D3D3D3"
+                            : item.lastAttempt <= 10 ? "#98FB98" //light green
+                            : item.lastAttempt >10 && item.lastAttempt<= 20 ? "#FFDAB9" : "#F08080"; //light orange, light red
+                               
 
-                            <div key={item.key}>
-                                <Card className={styles["my-card"]}>
-                                    <CardContent>
-                                        <CircularProgress
-                                            variant="determinate"
-                                            value={item.progress}
-                                            sx={{
-                                                color: 'red', 
-                                            
-                                                "& .MuiCircularProgress-circle": {
-                                                    stroke: "pink", 
-                                                    opacity: 0.3, 
-                                                }
-                                            }}
-                                        />
-
-                                    </CardContent>
-                                    <div className={styles["first-item"]}>
-                                        <p className={styles.category}>{item.taskCategory}</p>
-                                        <p className={styles.smalllabel}>{item.task}</p>
-                                    </div>
-                                    <div className={styles["first-item"]}>
-                                        <p className={styles.active}>{item.active}</p>
-                                        <p className={styles.smalllabel}>{item.Frequency}</p>
-                                    </div>
-                                    <div className={styles["first-item"]}>
-                                        <p className={styles.daysago}>{item.lastAttempt} days ago</p>
-                                        <p className={styles.smalllabel}>{item.date}</p>
-                                    </div>
-                                    <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
-                                    <p>View More</p>
-                                </Card>
-                            </div>
-                        ))
+                            return (
+                                <div key={item.key}>
+                                    <Card className={styles["my-card"]}>
+                                        <CardContent>
+                                            <CircularProgress
+                                                variant="determinate"
+                                                value={item.progress}
+                                                sx={{
+                                                    color: 'red', 
+                                                    "& .MuiCircularProgress-circle": {
+                                                        stroke: "pink",
+                                                        opacity: 0.3,
+                                                    }
+                                                }}
+                                            />
+                                        </CardContent>
+                                        <div className={styles["first-item"]}>
+                                            <p className={styles.category} style={{ color: categoryColor }}>{item.taskCategory}</p>
+                                            <p className={styles.smalllabel}>{item.task}</p>
+                                        </div>
+                                        <div className={styles["second-item"]}>
+                                            <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}>{item.active}</p>
+                                            <p className={styles.smalllabel}>{item.Frequency}</p>
+                                        </div>
+                                        <div className={styles["third-item"]}>
+                                            <p className={styles.daysago} style={{ color: lastColor, backgroundColor: lastBackground }}>{item.lastAttempt} days ago</p>
+                                            <p className={styles.smalllabel}>{item.date}</p>
+                                        </div>
+                                        <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
+                                        <p>View More</p>
+                                    </Card>
+                                </div>
+                            );
+                        })
                     ) : (
                         <p>No matching tasks found.</p>
                     )}
+
                 </div>
             </div>
+
 
 
             <div className={styles["filter"]}>

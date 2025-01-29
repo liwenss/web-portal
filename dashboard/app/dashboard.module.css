@@ -7,6 +7,7 @@
     margin-top: 2%;
     margin-bottom: 2%;
     box-shadow: none;
+    padding-top: 2%;
 }
 
 .entire-page {
@@ -14,9 +15,7 @@
     width: 100%;
     justify-content: space-between;
     background-color: rgb(245, 245, 245);
-
 }
-
 
 .filter {
     max-width: 20%;
@@ -59,36 +58,80 @@
 
 .smalllabel {
     font-size: 80%;
+    margin-top: 2%;
 }
 
 .category {
     background-color: white;
-    padding: 2%;
+    padding: 0 2%; 
     text-align: center;
     width: 100px;
+    height: 34px; 
     border-radius: 30px;
-    max-height:34px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    max-height: 34px;
 }
 
 .active {
     background-color: white;
-    padding: 2%;
+    padding: 0 2%; 
     text-align: center;
     width: 80px;
+    height: 34px; 
     border-radius: 30px;
-    max-height:34px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    max-height: 34px;
 }
+
 
 .daysago {
     background-color: white;
-    padding: 2%;
+    padding: 0 2%; 
     text-align: center;
-    width: 80px;
+    width: 100px;
+    height: 34px; 
     border-radius: 30px;
-    max-height:34px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    max-height: 34px; 
     
 }
 
 .first-item {
-    width: 200px;
+    width: 180px;
+    align-items: start;
+    margin-right: 5%;
+   
+   
 }
+.first-item p {
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+}
+
+.second-item {
+    width: 180px;
+    align-items: start;
+ 
+}
+.second-item p {
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+}
+
+.third-item {
+    width: 180px;
+    align-items: start;
+    margin-right: 5%;
+}
+.third-item p {
+    margin-bottom: 0; 
+    padding-bottom: 0; 
+}
+
+
