@@ -41,6 +41,22 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
             label: '60',
         },
     ];
+    const beginningColor = value1 <= 10 ? "rgb(91, 211, 91)" //green
+    : value1 <=20 ? "rgb(91, 211, 91)" //yellow green
+    : value1 <=30 ? " rgb(164, 211, 90)"  //yellow
+    : value1 <=40 ? "rgb(219, 166, 67)" //light orange
+    : value1 <=50 ? "rgb(255, 130, 56)" //strong orange
+    : value1 <=60?  "#f44336" : "#f44336"; //organge, red
+
+    const endingColor = value3 <= 10 ? "rgb(91, 211, 91)" //green
+    : value3 <=20 ? "rgb(91, 211, 91)" //yellow green
+    : value3 <=30 ? " rgb(164, 211, 90)"  //yellow
+    : value3 <=40 ? "rgb(219, 166, 67)" //light orange
+    : value3 <=50 ? "rgb(255, 130, 56)" //strong orange
+    : value3 <=60?  "#f44336" : "#f44336"; //organge, red
+    //const endingColor = value3 <= 20 ? "rgb(91, 211, 91)"
+    //: value3 <=40 ? "rgb(219, 166, 67)" 
+    //: value3 <=60?  "#f44336" : "#f44336"; //organge, red
 
     return (
         <Box sx={{ width: 200 }}>
@@ -51,6 +67,7 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                 marks={marks}
                 min={0}
                 max={60}
+               
                 valueLabelDisplay="auto"
                 slotProps={{
                     thumb: ({ value }) => ({
@@ -61,12 +78,21 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                             border: 'none',
                             boxShadow: 'none',
                             visibility: 'hidden',
+                            display: 'none',
                         },
                     }),
                 }}
                 sx={{
+                    '& .MuiSlider-thumb': {
+                        width: 0,  // Ensure thumb has no width
+                        height: 0, // Ensure thumb has no height
+                        backgroundColor: 'transparent',  // Make thumb completely invisible
+                        boxShadow: 'none',  // Remove any shadow that could be causing visibility
+                        border: 'none',  // Remove any default border
+                        pointerEvents: 'none',  // Prevent any user interaction
+                    },
                     '& .MuiSlider-track': {
-                        background: 'linear-gradient(to right, #4caf50 10%, #f44336 100%)', // Green to Red gradient
+                        background: `linear-gradient(to right, ${beginningColor} 0%, rgb(219, 166, 67) 50%, ${endingColor} 100%)`, // Green to Red gradient
                         height: '18px',
                         borderRadius: '20px',
                         borderColor: 'transparent',

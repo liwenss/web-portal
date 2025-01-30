@@ -47,7 +47,7 @@ const data = [
   },
   {
     key: 3,
-    progress: 75,
+    progress: 76,
     taskCategory: "Combo",
     task: "Dynamic stance, upper extremify",
     active: "Active",

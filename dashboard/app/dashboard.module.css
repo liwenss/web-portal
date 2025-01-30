@@ -21,9 +21,8 @@
 }
 
 .nothing {
-    color:rgb(226, 164, 164);
+    color:rgb(0, 173, 0);
 }
-
 .scrollableContainer {
     width: 106.5%;  
     max-width: 1400px;

@@ -15,17 +15,20 @@ interface ProgressBarProps {
           <CircularProgress
           variant="determinate"
           value={100}
+          thickness={5} 
         
             sx={{
               position: 'absolute',
               top: 0,
               left: 0,
               color: color2,
+             
             }}
           />
           <CircularProgress
           variant="determinate"
           value={progress}
+          thickness={5} 
     
             sx={{
               position: 'absolute',
