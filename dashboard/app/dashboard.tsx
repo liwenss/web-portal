@@ -31,7 +31,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
 import { SxProps } from '@mui/material/styles';
-
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 
 
@@ -122,7 +122,7 @@ export default function Dashboard({
 
     return (
         <div className={styles["entire-page"]}>
-            <div>
+            <div className={styles["content"]}>
                 <form noValidate autoComplete="off">
                     <FormControl sx={{ width: '25ch' }} className={styles.searchbar}>
                         <OutlinedInput placeholder="Search Exercise"
@@ -181,16 +181,16 @@ export default function Dashboard({
                         displayedData.map((item) => {
                             const categoryColor = item.taskCategory === "Balance" ? "#20B2AA"
                                 : item.taskCategory === "Combo" ? "purple" //purple
-                                : item.taskCategory === "Upper Ex"? "orange" : "red"; //organge, red
+                                    : item.taskCategory === "Upper Ex" ? "orange" : "red"; //organge, red
                             const activewords = item.active === "Active" ? "purple" : "grey"; //purple, grey
                             const activebackground = item.active === "Active" ? "white" : "#D3D3D3"; //white, grey
                             const lastColor = item.active === "Inactive" ? "grey"
-                            : item.lastAttempt <= 10 ? "green"
-                            : item.lastAttempt >10 && item.lastAttempt<= 20 ? "orange" : "red";
+                                : item.lastAttempt <= 10 ? "green"
+                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "orange" : "red";
                             const lastBackground = item.active === "Inactive" ? "#D3D3D3"
-                            : item.lastAttempt <= 10 ? "#98FB98" //light green
-                            : item.lastAttempt >10 && item.lastAttempt<= 20 ? "#FFDAB9" : "#F08080"; //light orange, light red
-                               
+                                : item.lastAttempt <= 10 ? "#98FB98" //light green
+                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#FFDAB9" : "#F08080"; //light orange, light red
+
 
                             return (
                                 <div key={item.key}>
@@ -200,9 +200,9 @@ export default function Dashboard({
                                                 variant="determinate"
                                                 value={item.progress}
                                                 sx={{
-                                                    color: 'red', 
+                                                    color: 'red',
                                                     "& .MuiCircularProgress-circle": {
-                                                        stroke: "pink",
+                                                        stroke: "red",
                                                         opacity: 0.3,
                                                     }
                                                 }}
@@ -220,8 +220,11 @@ export default function Dashboard({
                                             <p className={styles.daysago} style={{ color: lastColor, backgroundColor: lastBackground }}>{item.lastAttempt} days ago</p>
                                             <p className={styles.smalllabel}>{item.date}</p>
                                         </div>
-                                        <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
-                                        <p>View More</p>
+                                        <div className={styles["myslider"]}>
+                                            <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
+                                        </div>
+                                        <p className={styles["viewmore"]}>View More <MoreVertIcon /> </p>
+
                                     </Card>
                                 </div>
                             );
@@ -236,9 +239,12 @@ export default function Dashboard({
 
 
             <div className={styles["filter"]}>
-                <p>All Categories</p>
-                <p>Clear filters</p>
-                <Accordion>
+                <div className={styles["filter-title"]}>
+                <p className={styles["all-categories"]}>All Categories</p>
+                <p className={styles["clear-filters"]}>Clear filters</p>
+                </div>
+                <div className={styles["custom-divider"]}></div>
+                <Accordion className={styles["accordion"]}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
                         <FormControlLabel control={<Checkbox
                             defaultChecked={false}
@@ -252,7 +258,7 @@ export default function Dashboard({
                         ADV Dynamic Stance
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion className={styles["accordion"]}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                         <Typography component="span">
                             <FormControlLabel control={<Checkbox
@@ -266,7 +272,7 @@ export default function Dashboard({
                     </AccordionDetails>
 
                 </Accordion>
-                <Accordion>
+                <Accordion className={styles["accordion"]}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel2-content" id="panel2-header">
                         <Typography component="span">
                             <FormControlLabel control={<Checkbox

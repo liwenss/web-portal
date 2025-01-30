@@ -42,7 +42,7 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
     ];
 
     return (
-        <Box sx={{ width: 250 }}>
+        <Box sx={{ width: 200 }}>
             <Slider
                 aria-labelledby="track-false-range-slider"
                 getAriaValueText={valuetext}
@@ -54,42 +54,46 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                 slotProps={{
                     thumb: ({ value }) => ({
                         sx: {
-                            backgroundColor: 'transparent',  // Make thumb invisible
+                            backgroundColor: 'transparent', 
                             height: 0,
                             width: 0,
                             border: 'none',
                             boxShadow: 'none',
-                            visibility: 'hidden',  // Keep thumb hidden
+                            visibility: 'hidden', 
                         },
                     }),
                 }}
                 sx={{
-                    // Styling the track to have the gradient from green to red
                     '& .MuiSlider-track': {
                         background: 'linear-gradient(to right, #4caf50 10%, #f44336 100%)', // Green to Red gradient
-                        height: '6px',
-                        borderRadius: '3px',
+                        height: '18px',
+                        borderRadius: '20px',
+                      
                     },
-                    // Styling the rail (background behind the track) to be white
                     '& .MuiSlider-rail': {
-                        backgroundColor: 'white',  // White background for the rail
-                        height: '6px',
-                        borderRadius: '3px',
+                        backgroundColor: 'white', 
+                        height: '18px',
+                        borderRadius: '20px',
+                        borderTop: '2px solid rgba(0, 0, 0, 0.3)', 
+                        borderLeft: '2px solid rgba(0, 0, 0, 0.3)',
+                       
 
                     },
                     '& .MuiSlider-active': {
                         color: "black"
                     },
-                    // Optional: Adding a vertical line at the 50 mark
                     position: 'relative',
                     '&::after': {
                         content: '""',
                         position: 'absolute',
                         top: '0',
                         bottom: '0',
-                        left: `calc(${(value2 / 60) * 100}% - 1px)`,  // Adjust vertical line based on value2
+                        left: `calc(${(value2 / 60) * 100}% - 1px)`,  
                         width: "2px",
-                        backgroundColor: '#333',  // Vertical line color
+                        backgroundColor: 'rgb(92, 0, 128)',  
+                    },
+                    '& .MuiSlider-mark': {
+                        display: 'none', 
                     },
                 }}
             />
