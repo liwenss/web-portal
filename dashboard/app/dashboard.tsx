@@ -31,6 +31,8 @@ import FormHelperText from '@mui/material/FormHelperText';
 import { SxProps } from '@mui/material/styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CircleIcon from '@mui/icons-material/Circle';
+import Box from '@mui/material/Box';
+
 
 
 
@@ -182,7 +184,7 @@ export default function Dashboard({
                     <p>Average Time to Complete</p>
                 </div>
 
-                <div>
+                <div className={styles.scrollableContainer}>
                     {displayedData.length > 0 ? (
                         displayedData.map((item) => {
                             const categoryColor = item.taskCategory === "Balance" ? "rgb(59, 199, 194)"
@@ -193,12 +195,13 @@ export default function Dashboard({
                             const lastColor = item.active === "Inactive" ? "rgb(119, 124, 130)"
                                 : item.lastAttempt <= 10 ? "rgb(1, 145, 1)" //green
                                     : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "rgb(219, 142, 0)" : "rgb(226, 0, 0)"; //orange
-                            const lastBackground = item.active === "Inactive" ? "rgb(211, 208, 218)" 
+                            const lastBackground = item.active === "Inactive" ? "rgb(211, 208, 218)"
                                 : item.lastAttempt <= 10 ? "rgb(210, 247, 204)" //light green
                                     : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#f9ecc8" : "#fdd9d9"; //light orange, light red
 
 
                             return (
+
                                 <div key={item.key}>
                                     <Card className={styles["my-card"]}>
                                         <CardContent>
@@ -219,7 +222,7 @@ export default function Dashboard({
                                             <p className={styles.smalllabel}>{item.task}</p>
                                         </div>
                                         <div className={styles["second-item"]}>
-                                            <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}> <CircleIcon style={{ fontSize: '10px', marginRight: '4px'  }} />{item.active}</p>
+                                            <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}> <CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.active}</p>
                                             <p className={styles.smalllabel}>{item.Frequency}</p>
                                         </div>
                                         <div className={styles["third-item"]}>
@@ -233,30 +236,32 @@ export default function Dashboard({
 
                                     </Card>
                                 </div>
+
+
                             );
                         })
                     ) : (
                         <p>No matching tasks found.</p>
                     )}
-
                 </div>
+
             </div>
 
 
 
             <div className={styles["filter"]}>
                 <div className={styles["filter-title"]}>
-                <p className={styles["all-categories"]}>All Categories</p>
-                <p className={styles["clear-filters"]}>Clear filters</p>
+                    <p className={styles["all-categories"]}>All Categories</p>
+                    <p className={styles["clear-filters"]}>Clear filters</p>
                 </div>
                 <div className={styles["custom-divider"]}></div>
                 <Accordion className={styles["accordion"]} >
                     <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header" >
                         <FormControlLabel control={<Checkbox
                             defaultChecked={false}
-                            sx={{  
+                            sx={{
                                 paddingTop: '0',
-                                paddingBottom: '0', 
+                                paddingBottom: '0',
                             }}
                             onChange={(e) => handleLabelChange(e, ["ADV Static Standing", "ADV Dynamic stance, upper extremity"])}
                         />} label="Workout (23)" />
@@ -273,9 +278,9 @@ export default function Dashboard({
                         <Typography component="span">
                             <FormControlLabel control={<Checkbox
                                 defaultChecked={false}
-                                sx={{  
+                                sx={{
                                     paddingTop: '0',
-                                    paddingBottom: '0', 
+                                    paddingBottom: '0',
                                 }}
                                 onChange={(e) => handleLabelChange(e, ["Sit to Stand"])}
                             />} label="Basic ADL (17)" />
@@ -291,9 +296,9 @@ export default function Dashboard({
                         <Typography component="span">
                             <FormControlLabel control={<Checkbox
                                 defaultChecked={false}
-                                sx={{  
+                                sx={{
                                     paddingTop: '0',
-                                    paddingBottom: '0', 
+                                    paddingBottom: '0',
                                 }}
                                 onChange={(e) => handleLabelChange(e, ["Dynamic stance, upper extremify", "Static Standing"])}
                             />} label="Instrumental ADL (5)" />

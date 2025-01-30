@@ -17,6 +17,30 @@
     color:rgb(211, 208, 218);
 }
 
+.scrollableContainer {
+    width: 106.5%;  
+    max-width: 1400px;
+    max-height: 620px; 
+    overflow-y: auto;
+    scrollbar-width: auto;
+    scrollbar-color: rgba(0, 0, 0, 0.2) rgba(255, 255, 255, 0.1);
+}
+
+/* Webkit (Chrome, Edge, Safari) */
+.scrollableContainer::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollableContainer::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.scrollableContainer::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    height: 8px;
+}
+
 .entire-page {
     display: flex;
     width: 100%;
