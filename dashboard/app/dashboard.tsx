@@ -138,6 +138,9 @@ export default function Dashboard({
                 <form noValidate autoComplete="off">
                     <FormControl sx={{ width: '25ch' }} className={styles.searchbar}>
                         <OutlinedInput placeholder="Search Exercise"
+                        value={searchinput} 
+                        onChange={(e) => setSearchinput(e.target.value)} 
+                        onKeyDown={handleKeyDown}
                             startAdornment={
                                 <InputAdornment position="start">
                                     <SearchIcon />
