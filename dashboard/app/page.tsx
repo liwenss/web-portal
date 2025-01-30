@@ -1,6 +1,8 @@
 
 import * as React from 'react';
 import Dashboard from './dashboard';
+import { StyledEngineProvider } from '@mui/material/styles';
+
 
 
 const data = [
@@ -140,9 +142,11 @@ const data = [
 
 export default function Home() {
   return (
+    <StyledEngineProvider injectFirst>
     <div>
     <Dashboard data={data}/>
   </div>
+  </StyledEngineProvider>
 
   )
   
