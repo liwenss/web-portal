@@ -87,8 +87,8 @@
 
 .sorting {
     display: flex;
-    margin-left: 6%;
-    margin-top: 2%;
+    margin-left: 5%;
+    margin-top: 1%;
     align-items: center;
  }
 
@@ -201,4 +201,28 @@
     color: rgb(143, 144, 145);
     font-weight: 600;
     align-items: center;
+}
+
+.headers {
+    display: flex;
+    margin-left: 5%;
+    font-weight: 600;
+    margin-top: 2%;
+}
+
+.progressTitle {
+    width: 92px;
+}
+
+.taskTitle {
+    width: 188px;
+}
+
+.frequencyTitle {
+    width: 146px;
+}
+
+.lastattempTitle {
+    width: 172px;
+
 }

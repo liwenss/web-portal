@@ -174,6 +174,13 @@ export default function Dashboard({
                         </Select>
                     </FormControl>
                 </div>
+                <div className={styles.headers}>
+                    <p className={styles.progressTitle}>Progress</p>
+                    <p className={styles.taskTitle}>Tasks</p>
+                    <p className={styles.frequencyTitle}>Frequency</p>
+                    <p className={styles.lastattempTitle}>Last Attempt</p>
+                    <p>Average Time to Complete</p>
+                </div>
 
                 <div>
                     {displayedData.length > 0 ? (
