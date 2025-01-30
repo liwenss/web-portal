@@ -30,6 +30,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormHelperText from '@mui/material/FormHelperText';
 import { SxProps } from '@mui/material/styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CircleIcon from '@mui/icons-material/Circle';
 
 
 
@@ -177,17 +178,17 @@ export default function Dashboard({
                 <div>
                     {displayedData.length > 0 ? (
                         displayedData.map((item) => {
-                            const categoryColor = item.taskCategory === "Balance" ? "#20B2AA"
-                                : item.taskCategory === "Combo" ? "purple" //purple
+                            const categoryColor = item.taskCategory === "Balance" ? "rgb(59, 199, 194)"
+                                : item.taskCategory === "Combo" ? "rgb(177, 68, 202)" //purple
                                     : item.taskCategory === "Upper Ex" ? "orange" : "red"; //organge, red
-                            const activewords = item.active === "Active" ? "purple" : "grey"; //purple, grey
-                            const activebackground = item.active === "Active" ? "white" : "#D3D3D3"; //white, grey
-                            const lastColor = item.active === "Inactive" ? "grey"
-                                : item.lastAttempt <= 10 ? "green"
-                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "orange" : "red";
-                            const lastBackground = item.active === "Inactive" ? "#D3D3D3"
-                                : item.lastAttempt <= 10 ? "#98FB98" //light green
-                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#FFDAB9" : "#F08080"; //light orange, light red
+                            const activewords = item.active === "Active" ? "rgb(74, 57, 225)" : "grey"; //purple, grey
+                            const activebackground = item.active === "Active" ? "white" : "rgb(211, 208, 218)"; //white, grey
+                            const lastColor = item.active === "Inactive" ? "rgb(119, 124, 130)"
+                                : item.lastAttempt <= 10 ? "rgb(1, 145, 1)" //green
+                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "rgb(219, 142, 0)" : "rgb(226, 0, 0)"; //orange
+                            const lastBackground = item.active === "Inactive" ? "rgb(211, 208, 218)" 
+                                : item.lastAttempt <= 10 ? "rgb(210, 247, 204)" //light green
+                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#f9ecc8" : "#fdd9d9"; //light orange, light red
 
 
                             return (
@@ -207,11 +208,11 @@ export default function Dashboard({
                                             />
                                         </CardContent>
                                         <div className={styles["first-item"]}>
-                                            <p className={styles.category} style={{ color: categoryColor }}>{item.taskCategory}</p>
+                                            <p className={styles.category} style={{ color: categoryColor }}><CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.taskCategory}</p>
                                             <p className={styles.smalllabel}>{item.task}</p>
                                         </div>
                                         <div className={styles["second-item"]}>
-                                            <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}>{item.active}</p>
+                                            <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}> <CircleIcon style={{ fontSize: '10px', marginRight: '4px'  }} />{item.active}</p>
                                             <p className={styles.smalllabel}>{item.Frequency}</p>
                                         </div>
                                         <div className={styles["third-item"]}>
@@ -221,7 +222,7 @@ export default function Dashboard({
                                         <div className={styles["myslider"]}>
                                             <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
                                         </div>
-                                        <p className={styles["viewmore"]}>View More <MoreVertIcon /> </p>
+                                        <p className={styles["viewmore"]}>View More <MoreVertIcon sx={{ fontSize: '34px' }} /> </p>
 
                                     </Card>
                                 </div>
@@ -242,10 +243,14 @@ export default function Dashboard({
                 <p className={styles["clear-filters"]}>Clear filters</p>
                 </div>
                 <div className={styles["custom-divider"]}></div>
-                <Accordion className={styles["accordion"]}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header">
+                <Accordion className={styles["accordion"]} >
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1-content" id="panel1-header" >
                         <FormControlLabel control={<Checkbox
                             defaultChecked={false}
+                            sx={{  
+                                paddingTop: '0',
+                                paddingBottom: '0', 
+                            }}
                             onChange={(e) => handleLabelChange(e, ["ADV Static Standing", "ADV Dynamic stance, upper extremity"])}
                         />} label="Workout (23)" />
                     </AccordionSummary>
@@ -261,6 +266,10 @@ export default function Dashboard({
                         <Typography component="span">
                             <FormControlLabel control={<Checkbox
                                 defaultChecked={false}
+                                sx={{  
+                                    paddingTop: '0',
+                                    paddingBottom: '0', 
+                                }}
                                 onChange={(e) => handleLabelChange(e, ["Sit to Stand"])}
                             />} label="Basic ADL (17)" />
                         </Typography>
@@ -275,6 +284,10 @@ export default function Dashboard({
                         <Typography component="span">
                             <FormControlLabel control={<Checkbox
                                 defaultChecked={false}
+                                sx={{  
+                                    paddingTop: '0',
+                                    paddingBottom: '0', 
+                                }}
                                 onChange={(e) => handleLabelChange(e, ["Dynamic stance, upper extremify", "Static Standing"])}
                             />} label="Instrumental ADL (5)" />
 

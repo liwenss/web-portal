@@ -3,14 +3,18 @@
     margin-left: 4%;
     margin-right: 4%;
     width: 1000px;
-    background-color: rgb(233, 233, 233);
-    margin-top: 2%;
-    margin-bottom: 2%;
+    background-color: rgb(236, 237, 237);
+    margin-top: 1.6%;
+    margin-bottom: 1.6%;
     box-shadow: none;
-    padding-top: 2%;
-    padding-right: 4%;
-   
-  
+    padding-top: 1.3%;
+    padding-right: 2%;
+    height: 84px;
+    border-radius: 16px;
+}
+
+.nothing {
+    color:rgb(211, 208, 218);
 }
 
 .entire-page {
@@ -25,7 +29,7 @@
 .filter {
     margin-right: 4%;
     background: transparent;
-    margin-top: 8%;
+    margin-top: 7%;
 }
 
 .filter-title {
@@ -48,27 +52,25 @@
     height: 3px; 
     background: linear-gradient(to right, transparent, black 50%, transparent);
     margin: 0 0;
+    margin-bottom: 12px;
 }
-
-
 
 .accordion {
     background: transparent;
     box-shadow: none;
-    border: none; 
+    border: none;
 }
+
+
+
 .accordion::before {
     display: none; 
 }
 
-.nothing {
-    color:rgb(92, 0, 128);
-}
-
 .searchbar {
-    margin-top: 4%;
+    margin-top: 2%;
     margin-left: 4%;
-    width: 60%;
+    width: 34%;
     border-radius: 50%;
     border-radius: 40px; 
 }
@@ -103,32 +105,39 @@
 .smalllabel {
     font-size: 80%;
     margin-top: 2%;
+    margin-left: 4px;
+    color: rgb(143, 144, 145);
+    font-weight: 600;
 }
 
 .category {
     background-color: white;
-    padding: 0 2%; 
+    padding: 0 0%; 
     text-align: center;
-    width: 100px;
-    height: 34px; 
+    width: 98px;
+    height: 28px; 
     border-radius: 30px;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    max-height: 34px;
+    max-height: 32px;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .active {
     background-color: white;
     padding: 0 2%; 
     text-align: center;
-    width: 80px;
-    height: 34px; 
+    width: 78px;
+    height: 30px; 
     border-radius: 30px;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    max-height: 34px;
+    max-height: 32px;
+    font-weight: 600;
+    font-size: 15px;
 }
 
 
@@ -136,18 +145,19 @@
     background-color: white;
     padding: 0 2%; 
     text-align: center;
-    width: 100px;
-    height: 34px; 
+    width: 98px;
+    height: 28px; 
     border-radius: 30px;
     display: flex;
     justify-content: center; 
     align-items: center; 
-    max-height: 34px; 
-    
+    max-height: 32px; 
+    font-weight: 600;
+    font-size: 15px;
 }
 
 .first-item {
-    width: 180px;
+    width: 190px;
     align-items: start;
     margin-right: 5%;
    
@@ -156,10 +166,11 @@
 .first-item p {
     margin-bottom: 0; 
     padding-bottom: 0; 
+   
 }
 
 .second-item {
-    width: 180px;
+    width: 160px;
     align-items: start;
  
 }
@@ -179,7 +190,7 @@
 }
 
 .myslider {
-    margin-right: 20px;
+    margin-right: 60px;
 }
 
 .viewmore {
@@ -187,4 +198,7 @@
     text-align: center;
     align-self: center;
     white-space: noWrap;
+    color: rgb(143, 144, 145);
+    font-weight: 600;
+    align-items: center;
 }

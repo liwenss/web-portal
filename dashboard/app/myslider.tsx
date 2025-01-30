@@ -32,7 +32,7 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
         },
         {
             value: value2,
-            label: `${value2} sec`,
+            label: `${value2}sec`,
         },
 
         {
@@ -54,12 +54,12 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                 slotProps={{
                     thumb: ({ value }) => ({
                         sx: {
-                            backgroundColor: 'transparent', 
+                            backgroundColor: 'transparent',
                             height: 0,
                             width: 0,
                             border: 'none',
                             boxShadow: 'none',
-                            visibility: 'hidden', 
+                            visibility: 'hidden',
                         },
                     }),
                 }}
@@ -68,15 +68,20 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                         background: 'linear-gradient(to right, #4caf50 10%, #f44336 100%)', // Green to Red gradient
                         height: '18px',
                         borderRadius: '20px',
-                      
+                        borderColor: 'transparent',
+                        position: 'relative',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+
+
                     },
                     '& .MuiSlider-rail': {
-                        backgroundColor: 'white', 
-                        height: '18px',
+                        backgroundColor: 'white',
+                        height: '24px',
                         borderRadius: '20px',
-                        borderTop: '2px solid rgba(0, 0, 0, 0.3)', 
+                        borderTop: '2px solid rgba(0, 0, 0, 0.3)',
                         borderLeft: '2px solid rgba(0, 0, 0, 0.3)',
-                       
+
 
                     },
                     '& .MuiSlider-active': {
@@ -88,12 +93,16 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                         position: 'absolute',
                         top: '0',
                         bottom: '0',
-                        left: `calc(${(value2 / 60) * 100}% - 1px)`,  
+                        left: `calc(${(value2 / 60) * 100}% - 1px)`,
                         width: "2px",
-                        backgroundColor: 'rgb(92, 0, 128)',  
+                        backgroundColor: 'rgb(92, 0, 128)',
                     },
                     '& .MuiSlider-mark': {
-                        display: 'none', 
+                        display: 'none',
+                    },
+                    '& .MuiSlider-markLabel': {
+                        color: 'rgb(143, 144, 145)',
+                        fontWeight: '600',
                     },
                 }}
             />
