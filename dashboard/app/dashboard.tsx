@@ -33,6 +33,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CircleIcon from '@mui/icons-material/Circle';
 import Box from '@mui/material/Box';
 import Marker from './marker';
+import ProgressBar from './progressBar';
 
 
 
@@ -123,11 +124,11 @@ export default function Dashboard({
     const [values, setValues] = React.useState([MIN, MAX]);
 
     const containerStyle = {
-        width: '106.5%',  // Percent values should be in quotes
+        width: '106.5%',  
         maxWidth: '1400px',
         maxHeight: '620px',
         overflowY: 'auto',
-        scrollbarWidth: 'auto',  // Corrected from 'scrollbar-width'
+        scrollbarWidth: 'auto',  
         scrollbarColor: 'rgba(0, 0, 0, 0.2) rgba(255, 255, 255, 0.1)', // Corrected syntax
     };
 
@@ -218,23 +219,16 @@ export default function Dashboard({
                                         : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#f9ecc8" : "#fdd9d9"; //light orange, light red
                                 const progressColor = item.progress <= 25 ? "red"
                                     : item.progress <= 75 ? "orange" : "green"
+                                    const progressBackground= item.progress <= 25 ? "rgb(226, 164, 164)"
+                                    : item.progress <= 75 ? "rgb(255, 191, 113)" : "rgb(64, 172, 64)" //ligth orange, ligth green
 
                                 return (
-
                                     <div key={item.key}>
                                         <Card className={styles["my-card"]}>
                                             <CardContent>
-                                                <CircularProgress
-                                                    variant="determinate"
-                                                    value={item.progress}
-                                                    sx={{
-                                                        color: progressColor ,
-                                                        "& .MuiCircularProgress-circle": {
-                                                            stroke: {progressColor},
-                                                         
-                                                        }
-                                                    }}
-                                                />
+                                                <div className={styles["my-progress"]}>
+                                            <ProgressBar color1={progressColor} color2={progressBackground} progress={item.progress}/>
+                                            </div>
                                             </CardContent>
                                             <div className={styles["first-item"]}>
                                                 <p className={styles.category} style={{ color: categoryColor }}><CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.taskCategory}</p>
