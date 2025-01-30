@@ -32,6 +32,7 @@ import { SxProps } from '@mui/material/styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CircleIcon from '@mui/icons-material/Circle';
 import Box from '@mui/material/Box';
+import Marker from './marker';
 
 
 
@@ -121,6 +122,15 @@ export default function Dashboard({
     const MAX = 600;
     const [values, setValues] = React.useState([MIN, MAX]);
 
+    const containerStyle = {
+        width: '106.5%',  // Percent values should be in quotes
+        maxWidth: '1400px',
+        maxHeight: '620px',
+        overflowY: 'auto',
+        scrollbarWidth: 'auto',  // Corrected from 'scrollbar-width'
+        scrollbarColor: 'rgba(0, 0, 0, 0.2) rgba(255, 255, 255, 0.1)', // Corrected syntax
+    };
+
     return (
         <div className={styles["entire-page"]}>
             <div className={styles["content"]}>
@@ -184,69 +194,77 @@ export default function Dashboard({
                     <p>Average Time to Complete</p>
                 </div>
 
-                <div className={styles.scrollableContainer}>
-                    {displayedData.length > 0 ? (
-                        displayedData.map((item) => {
-                            const categoryColor = item.taskCategory === "Balance" ? "rgb(59, 199, 194)"
-                                : item.taskCategory === "Combo" ? "rgb(177, 68, 202)" //purple
-                                    : item.taskCategory === "Upper Ex" ? "orange" : "red"; //organge, red
-                            const activewords = item.active === "Active" ? "rgb(74, 57, 225)" : "grey"; //purple, grey
-                            const activebackground = item.active === "Active" ? "white" : "rgb(211, 208, 218)"; //white, grey
-                            const lastColor = item.active === "Inactive" ? "rgb(119, 124, 130)"
-                                : item.lastAttempt <= 10 ? "rgb(1, 145, 1)" //green
-                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "rgb(219, 142, 0)" : "rgb(226, 0, 0)"; //orange
-                            const lastBackground = item.active === "Inactive" ? "rgb(211, 208, 218)"
-                                : item.lastAttempt <= 10 ? "rgb(210, 247, 204)" //light green
-                                    : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#f9ecc8" : "#fdd9d9"; //light orange, light red
+
+                <div >
+                    <Box sx={{
+                        height: '620px',
+                        maxWidth: '1400px',
+                        width: '106.5%',
+                        overflow: "auto",
+                        scrollbarColor: 'rgb(68, 1, 155) rgba(255, 255, 255, 0.1)',
+                    }}>
+                        {displayedData.length > 0 ? (
+                            displayedData.map((item) => {
+                                const categoryColor = item.taskCategory === "Balance" ? "rgb(59, 199, 194)"
+                                    : item.taskCategory === "Combo" ? "rgb(177, 68, 202)" //purple
+                                        : item.taskCategory === "Upper Ex" ? "orange" : "red"; //organge, red
+                                const activewords = item.active === "Active" ? "rgb(74, 57, 225)" : "grey"; //purple, grey
+                                const activebackground = item.active === "Active" ? "white" : "rgb(211, 208, 218)"; //white, grey
+                                const lastColor = item.active === "Inactive" ? "rgb(119, 124, 130)"
+                                    : item.lastAttempt <= 10 ? "rgb(1, 145, 1)" //green
+                                        : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "rgb(219, 142, 0)" : "rgb(226, 0, 0)"; //orange
+                                const lastBackground = item.active === "Inactive" ? "rgb(211, 208, 218)"
+                                    : item.lastAttempt <= 10 ? "rgb(210, 247, 204)" //light green
+                                        : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#f9ecc8" : "#fdd9d9"; //light orange, light red
+                                const progressColor = item.progress <= 25 ? "red"
+                                    : item.progress <= 75 ? "orange" : "green"
+
+                                return (
+
+                                    <div key={item.key}>
+                                        <Card className={styles["my-card"]}>
+                                            <CardContent>
+                                                <CircularProgress
+                                                    variant="determinate"
+                                                    value={item.progress}
+                                                    sx={{
+                                                        color: progressColor ,
+                                                        "& .MuiCircularProgress-circle": {
+                                                            stroke: {progressColor},
+                                                         
+                                                        }
+                                                    }}
+                                                />
+                                            </CardContent>
+                                            <div className={styles["first-item"]}>
+                                                <p className={styles.category} style={{ color: categoryColor }}><CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.taskCategory}</p>
+                                                <p className={styles.smalllabel}>{item.task}</p>
+                                            </div>
+                                            <div className={styles["second-item"]}>
+                                                <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}> <CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.active}</p>
+                                                <p className={styles.smalllabel}>{item.Frequency}</p>
+                                            </div>
+                                            <div className={styles["third-item"]}>
+                                                <p className={styles.daysago} style={{ color: lastColor, backgroundColor: lastBackground }}>{item.lastAttempt} days ago</p>
+                                                <p className={styles.smalllabel}>{item.date}</p>
+                                            </div>
+                                            <div className={styles["myslider"]}>
+                                                <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
+                                            </div>
+                                            <p className={styles["viewmore"]}>View More <MoreVertIcon sx={{ fontSize: '34px' }} /> </p>
+
+                                        </Card>
+                                    </div>
 
 
-                            return (
-
-                                <div key={item.key}>
-                                    <Card className={styles["my-card"]}>
-                                        <CardContent>
-                                            <CircularProgress
-                                                variant="determinate"
-                                                value={item.progress}
-                                                sx={{
-                                                    color: 'red',
-                                                    "& .MuiCircularProgress-circle": {
-                                                        stroke: "red",
-                                                        opacity: 0.3,
-                                                    }
-                                                }}
-                                            />
-                                        </CardContent>
-                                        <div className={styles["first-item"]}>
-                                            <p className={styles.category} style={{ color: categoryColor }}><CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.taskCategory}</p>
-                                            <p className={styles.smalllabel}>{item.task}</p>
-                                        </div>
-                                        <div className={styles["second-item"]}>
-                                            <p className={styles.active} style={{ color: activewords, backgroundColor: activebackground }}> <CircleIcon style={{ fontSize: '10px', marginRight: '4px' }} />{item.active}</p>
-                                            <p className={styles.smalllabel}>{item.Frequency}</p>
-                                        </div>
-                                        <div className={styles["third-item"]}>
-                                            <p className={styles.daysago} style={{ color: lastColor, backgroundColor: lastBackground }}>{item.lastAttempt} days ago</p>
-                                            <p className={styles.smalllabel}>{item.date}</p>
-                                        </div>
-                                        <div className={styles["myslider"]}>
-                                            <Myslider value1={item.minRange} value2={item.avgTime} value3={item.maxRange} />
-                                        </div>
-                                        <p className={styles["viewmore"]}>View More <MoreVertIcon sx={{ fontSize: '34px' }} /> </p>
-
-                                    </Card>
-                                </div>
-
-
-                            );
-                        })
-                    ) : (
-                        <p>No matching tasks found.</p>
-                    )}
+                                );
+                            })
+                        ) : (
+                            <p>No matching tasks found.</p>
+                        )}
+                    </Box>
                 </div>
-
             </div>
-
 
 
             <div className={styles["filter"]}>
@@ -313,6 +331,8 @@ export default function Dashboard({
                     </AccordionDetails>
                 </Accordion>
             </div>
+
         </div>
+
     );
 }

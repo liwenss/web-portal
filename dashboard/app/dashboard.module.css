@@ -14,7 +14,7 @@
 }
 
 .nothing {
-    color:rgb(211, 208, 218);
+    color:rgb(68, 1, 155);
 }
 
 .scrollableContainer {
@@ -29,16 +29,19 @@
 /* Webkit (Chrome, Edge, Safari) */
 .scrollableContainer::-webkit-scrollbar {
     width: 8px;
+    height: 16px;
 }
 
 .scrollableContainer::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
+    background: rgb(74, 57, 225) ; /* Example color for the thumb */
+    border-radius: 4px; /* Optional: rounded edges */
 }
 
 .scrollableContainer::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
     height: 8px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .entire-page {

@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
+import Marker from './marker';
 
 const Separator = styled('div')(
     ({ theme }) => `
@@ -87,16 +88,7 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                     '& .MuiSlider-active': {
                         color: "black"
                     },
-                    position: 'relative',
-                    '&::after': {
-                        content: '""',
-                        position: 'absolute',
-                        top: '0',
-                        bottom: '0',
-                        left: `calc(${(value2 / 60) * 100}% - 1px)`,
-                        width: "2px",
-                        backgroundColor: 'rgb(92, 0, 128)',
-                    },
+                  
                     '& .MuiSlider-mark': {
                         display: 'none',
                     },
@@ -106,6 +98,24 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                     },
                 }}
             />
+             <Box
+    sx={{
+        position: 'relative', // Ensures this container is positioned within its parent
+        height: '100px', // Make sure the parent has a height (adjust as needed)
+    }}
+>
+    <Box
+        sx={{
+            position: 'absolute', // Position the marker inside its relative parent
+            top: '-40%',  // Adjust the top position
+            left: `calc(${(value2 / 60) * 100}% - 4px)`,  // Move the marker based on value2
+            transform: 'translateY(-50%)',  // Keep the marker centered vertically if needed
+        }}
+    >
+        <Marker />
+    </Box>
+</Box>
+
         </Box>
     );
 }
