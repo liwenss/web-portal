@@ -21,7 +21,7 @@
 }
 
 .nothing {
-    color:rgb(0, 173, 0);
+    color:rgb(219, 166, 67);
 }
 .scrollableContainer {
     width: 106.5%;  
@@ -59,10 +59,14 @@
     box-sizing: border-box;
 }
 
+.expanded-text {
+    margin-left: 14%;
+}
+
 .filter {
     margin-right: 4%;
     background: transparent;
-    margin-top: 7%;
+    margin-top: 6%;
 }
 
 .filter-title {

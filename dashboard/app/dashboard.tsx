@@ -219,7 +219,7 @@ export default function Dashboard({
                                         : item.lastAttempt > 10 && item.lastAttempt <= 20 ? "#f9ecc8" : "#fdd9d9"; //light orange, light red
                                 const progressColor = item.progress <= 25 ? "red"
                                     : item.progress <= 75 ? "orange" : "rgb(0, 188, 0)"
-                                const progressBackground= item.progress <= 25 ? "rgb(226, 164, 164)"
+                                    const progressBackground= item.progress <= 25 ? "rgb(226, 164, 164)"
                                     : item.progress <= 75 ? "rgb(254, 209, 153)" : "rgb(172, 200, 172)" //ligth orange, ligth green
 
                                 return (
@@ -279,10 +279,10 @@ export default function Dashboard({
                         />} label="Workout (23)" />
                     </AccordionSummary>
                     <AccordionDetails>
-                        ADV Static Standing
+                        <p className={styles["expanded-text"]}>ADV Static Standing</p>
                     </AccordionDetails>
                     <AccordionDetails>
-                        ADV Dynamic Stance
+                        <p className={styles["expanded-text"]}>ADV Dynamic Stance</p>
                     </AccordionDetails>
                 </Accordion>
                 <Accordion className={styles["accordion"]}>
@@ -299,7 +299,7 @@ export default function Dashboard({
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        Sit to Stand
+                        <p className={styles["expanded-text"]}>Sit to Stand</p>
                     </AccordionDetails>
 
                 </Accordion>
@@ -318,10 +318,10 @@ export default function Dashboard({
                         </Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        Dynamic Stance
+                        <p className={styles["expanded-text"]}>Dynamic Stance</p>
                     </AccordionDetails>
                     <AccordionDetails>
-                        Static Standing
+                        <p className={styles["expanded-text"]}>Static Standing</p>
                     </AccordionDetails>
                 </Accordion>
             </div>

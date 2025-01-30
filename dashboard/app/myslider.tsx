@@ -67,6 +67,7 @@ export default function Myslider({ value1, value2, value3 }: TrackFalseSliderPro
                 marks={marks}
                 min={0}
                 max={60}
+                disabled
                
                 valueLabelDisplay="auto"
                 slotProps={{
